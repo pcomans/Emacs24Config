@@ -38,3 +38,5 @@
 (when window-system
    (setq frame-title-format t)
    (tooltip-mode t))
+
+(set-face-attribute 'default nil :height 140)
