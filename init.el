@@ -100,3 +100,6 @@
    (tooltip-mode t))
 
 ;;(set-face-attribute 'default nil :height 140)
+
+;;Show Eshell as default buffer
+(eshell)
