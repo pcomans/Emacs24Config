@@ -15,6 +15,34 @@
   (when (not (package-installed-p p))
     (package-install p)))
 
+;; Fix the PATH
+;; This sets $MANPATH, $PATH and exec-path from your shell, but only on OS X.
+(unless (package-installed-p 'exec-path-from-shell)
+  (package-refresh-contents)
+  (package-install 'exec-path-from-shell))
+(when (memq window-system '(mac ns))
+  (exec-path-from-shell-initialize))
+
+;;; Set new lines to be indented automatically
+(define-key global-map (kbd "RET") 'newline-and-indent)
+
+;;; Auto indent on paste
+(dolist (command '(yank yank-pop))
+  (eval `(defadvice ,command (after indent-region activate)
+           (and (not current-prefix-arg)
+                (member major-mode '(emacs-lisp-mode lisp-mode
+                                                     clojure-mode    scheme-mode
+                                                     haskell-mode    ruby-mode
+                                                     rspec-mode      python-mode
+                                                     c-mode          c++-mode
+                                                     objc-mode       latex-mode
+                                                     plain-tex-mode  cuda-mode
+                                                     html-mode       java-mode
+                                                     js-mode         css-mode
+                                                     ))
+                (let ((mark-even-if-inactive transient-mark-mode))
+                  (indent-region (region-beginning) (region-end) nil))))))
+
 ;; My customizations
 ;; Turn the menu bar on again
 (if (fboundp 'menu-bar-mode) (menu-bar-mode 1))
