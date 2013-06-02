@@ -99,4 +99,4 @@
    (setq frame-title-format t)
    (tooltip-mode t))
 
-(set-face-attribute 'default nil :height 140)
+;;(set-face-attribute 'default nil :height 140)
