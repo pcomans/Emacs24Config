@@ -15,6 +15,37 @@
   (when (not (package-installed-p p))
     (package-install p)))
 
+;;scala-mode2
+(require 'package)
+(add-to-list 'package-archives
+             '("melpa" . "http://melpa.milkbox.net/packages/") t)
+(package-initialize)
+(unless (package-installed-p 'scala-mode2)
+  (package-refresh-contents) (package-install 'scala-mode2))
+
+;; Multi Web Mode
+(unless (package-installed-p 'multi-web-mode)
+  (package-refresh-contents)
+  (package-install 'multi-web-mode))
+(require 'multi-web-mode)
+   (setq mweb-default-major-mode 'html-mode)
+   (setq mweb-tags '((js-mode "<script[^>]*>" "</script>")
+                     (css-mode "<style[^>]*>" "</style>")))
+   (setq mweb-filename-extensions '("htm" "html"))
+   (multi-web-global-mode 1)
+
+;; Clojure Mode
+(unless (package-installed-p 'clojure-mode)
+  (package-refresh-contents)
+  (package-install 'clojure-mode))
+(add-hook 'clojure-mode-hook 'paredit-mode)
+
+;; nREPL
+(when (not (package-installed-p 'nrepl))
+  (package-install 'nrepl))
+(add-hook 'nrepl-interaction-mode-hook
+          'nrepl-turn-on-eldoc-mode)
+
 ;; Fix the PATH
 ;; This sets $MANPATH, $PATH and exec-path from your shell, but only on OS X.
 (unless (package-installed-p 'exec-path-from-shell)
