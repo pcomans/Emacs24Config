@@ -98,5 +98,12 @@
 (when window-system
    (setq frame-title-format t)
    (tooltip-mode t))
+   
+;;Configure move-text
+(unless (package-installed-p 'move-text)
+  (package-refresh-contents)
+  (package-install 'move-text))
+(require 'move-text)
+(move-text-default-bindings)
 
 ;;(set-face-attribute 'default nil :height 140)
