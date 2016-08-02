@@ -1,50 +1,23 @@
 ;;Emacs Starter Kit
 (require 'package)
-(add-to-list 'package-archives
-             '("marmalade" . "http://marmalade-repo.org/packages/") t)
+(add-to-list 'package-archives '("marmalade" . "https://marmalade-repo.org/packages/"))
 (package-initialize)
 
 (when (not package-archive-contents)
   (package-refresh-contents))
 
-;; Add in your own as you wish:
-(defvar my-packages '(starter-kit starter-kit-bindings)
-  "A list of packages to ensure are installed at launch.")
+(defvar my-packages '(better-defaults smex ido-ubiquitous))
 
+(package-initialize)
 (dolist (p my-packages)
   (when (not (package-installed-p p))
     (package-install p)))
 
-;;scala-mode2
-(require 'package)
-(add-to-list 'package-archives
-             '("melpa" . "http://melpa.milkbox.net/packages/") t)
-(package-initialize)
-(unless (package-installed-p 'scala-mode2)
-  (package-refresh-contents) (package-install 'scala-mode2))
-
-;; Multi Web Mode
-(unless (package-installed-p 'multi-web-mode)
-  (package-refresh-contents)
-  (package-install 'multi-web-mode))
-(require 'multi-web-mode)
-   (setq mweb-default-major-mode 'html-mode)
-   (setq mweb-tags '((js-mode "<script[^>]*>" "</script>")
-                     (css-mode "<style[^>]*>" "</style>")))
-   (setq mweb-filename-extensions '("htm" "html"))
-   (multi-web-global-mode 1)
-
-;; Clojure Mode
-(unless (package-installed-p 'clojure-mode)
-  (package-refresh-contents)
-  (package-install 'clojure-mode))
-(add-hook 'clojure-mode-hook 'paredit-mode)
-
-;; nREPL
-(when (not (package-installed-p 'nrepl))
-  (package-install 'nrepl))
-(add-hook 'nrepl-interaction-mode-hook
-          'nrepl-turn-on-eldoc-mode)
+;; Init SMEX
+(global-set-key (kbd "M-x") 'smex)
+(global-set-key (kbd "M-X") 'smex-major-mode-commands)
+;; This is your old M-x.
+(global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 
 ;; Fix the PATH
 ;; This sets $MANPATH, $PATH and exec-path from your shell, but only on OS X.
@@ -107,3 +80,17 @@
 (move-text-default-bindings)
 
 ;;(set-face-attribute 'default nil :height 140)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (move-text paredit ido-ubiquitous idle-highlight-mode find-file-in-project exec-path-from-shell dash better-defaults))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
