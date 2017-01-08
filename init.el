@@ -7,7 +7,7 @@
 (when (not package-archive-contents)
   (package-refresh-contents))
 
-(defvar my-packages '(better-defaults smex ido-ubiquitous))
+(defvar my-packages '(better-defaults smex ido-ubiquitous alchemist))
 
 (package-initialize)
 (dolist (p my-packages)
