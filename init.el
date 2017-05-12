@@ -79,19 +79,3 @@
   (package-install 'move-text))
 (require 'move-text)
 (move-text-default-bindings)
-
-;;(set-face-attribute 'default nil :height 140)
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   (quote
-    (move-text paredit ido-ubiquitous idle-highlight-mode find-file-in-project exec-path-from-shell dash better-defaults))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
