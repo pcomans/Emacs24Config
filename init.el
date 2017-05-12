@@ -7,7 +7,7 @@
 (when (not package-archive-contents)
   (package-refresh-contents))
 
-(defvar my-packages '(better-defaults smex ido-ubiquitous alchemist))
+(defvar my-packages '(better-defaults smex ido-ubiquitous alchemist web-mode find-file-in-project dracula-theme))
 
 (package-initialize)
 (dolist (p my-packages)
@@ -72,10 +72,32 @@
 (when window-system
    (setq frame-title-format t)
    (tooltip-mode t))
-   
+
+(require 'web-mode)
+(add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
+
+;;Set up find-file-in-project
+(autoload 'find-file-in-project "find-file-in-project" nil t)
+(autoload 'find-file-in-project-by-selected "find-file-in-project" nil t)
+(autoload 'find-directory-in-project-by-selected "find-file-in-project" nil t)
+(autoload 'ffip-show-diff "find-file-in-project" nil t)
+(autoload 'ffip-save-ivy-last "find-file-in-project" nil t)
+(autoload 'ffip-ivy-resume "find-file-in-project" nil t)
+(global-set-key (kbd "M-p") 'find-file-in-project)
+
 ;;Configure move-text
 (unless (package-installed-p 'move-text)
   (package-refresh-contents)
   (package-install 'move-text))
 (require 'move-text)
 (move-text-default-bindings)
+
+;; Enable Dracula theme
+(load-theme 'dracula t)
+
